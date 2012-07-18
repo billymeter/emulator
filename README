@@ -1,0 +1,52 @@
+Fuzyll's Challenge of the Nao #2
+********************************
+
+So, the last challenge didn't go so well...  I only got 2 submissions,
+and neither of them were fully complete.  One was able to actually
+execute the "Hello World!" program, so at least the challenge wasn't a
+total failure!  Regardless, I think it's probably time to move on.  I
+had wanted to do a harder and more interesting challenge for #2, but
+it kinda required everyone to understand how brainfuck works...  We'll
+save it for later.
+
+Your next challenge is to create an emulator.  The instruction set
+architecture you will be emulating is big-endian and has 18-bit wide
+instructions.  For now, assume that these 18-bit instructions are
+padded to a 32-bit width to make it easier.  You should also assume
+that each 18-bit instruction is made up of 4 discrete sections:
+
+1. 6-bit opcode
+2. 4-bit operand 1
+3. 4-bit operand 2
+4. 4-bit operand 3
+
+Thus, the sequence 00000000000000100100101011110000 should be interpreted as:
+
+- 14-bits of padding
+- the 6-bit opcode "100100" (36)
+- the 4-bit operand "1010" (10)
+- the 4-bit operand "1111" (15)
+- the 4-bit operand "0000" (0)
+
+For now, all I want your emulator to do is interpret any binary stream
+from a file (seriously, just pipe /dev/urandom into a file and read
+from that) and display how it interpreted it.  So, given a file
+containing the bytes above (actual bytes, not ASCII 0's and 1's), your
+interpreter should print something like the following back:
+
+OPC 36 | OP1 10 | OP2 15 | OP3 0
+
+One line per instruction parsed.  What your interpreter does when it
+encounters an "instruction" that contains "invalid" padding (anything
+other than 14x 0 bits) I'm leaving undefined.  You may either print
+"Illegal instruction" or just parse it anyway.  In the future, we'll
+be removing the padding and making your emulator actually execute
+18-bit instructions.
+
+Submissions can be in any programming language.  I would prefer to get
+links to submissions from GitHub (because you should all be using the
+WCSC GitHub repo for your WCSC projects and, therefore, spend a lot of
+time on GitHub anyway), but you may also just send me your code.  Your
+submission should be able to properly interpret any input I give it.
+As such, I only require your code as a submission and not whatever
+streams of data you choose to test with.
